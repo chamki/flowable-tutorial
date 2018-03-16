@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Timer Start Event -->
+<!-- Note: a sub-process cannot have a timer start event. -->
+<!-- Note: a start timer event is scheduled as soon as process is deployed. -->
+<!-- Note: when a new version of a process with a start timer event is deployed, 
+	the job corresponding with the previous timer will be removed. -->
+
+<!-- process will start 4 times, in 5 minute intervals, starting on 11th march 2011, 12:13 -->
+<startEvent id="theStart">
+	<timerEventDefinition>
+		<timeCycle>R4/2011-03-11T12:13/PT5M</timeCycle>
+	</timerEventDefinition>
+</startEvent>
+
+<!-- Example: process will start once, on selected date -->
+<startEvent id="theStart">
+	<timerEventDefintion>
+		<timeDate>2011-03-11T12:13:14</timeDate>
+	</timerEventDefintion>
+</startEvent>

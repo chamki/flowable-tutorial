@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  targetNamespace="http://flowable.org/bpmn20"
+  xmlns:flowable="http://flowable.org/bpmn"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  
+  <!-- declaration of the signal -->
+  <signal id="alertSignal" name="alert" flowable:scope="processInstance"/>
+  
+  <process id="catchSignal">
+  	<intermediateThrowEvent id="throwSignalEvent" name="Alert">
+  		<!-- signal event definition -->
+  		<signalEventDefinition signalRef="alertSignal"/>
+  	</intermediateThrowEvent>
+  	
+  	<intermediateCatchEvent id="catchSignalEvent" name="On Alert">
+  		<!-- signal event definition -->
+  		<signalEventDefinition signalRef="alertSignal"/>
+  	</intermediateCatchEvent>
+  </process>
+  </definitions>
+<!-- However, due to the broadcast semantics of the signal, it would also be propagated to all other process instances that have subscribed to the signal event. -->

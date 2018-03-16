@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+  <process id="myProcess">
+  	<boundaryEvent id="compensateBookHotelEvt" attachedToRef="bookHotel">
+  		<compensateEventDefinition/>
+  	</boundaryEvent>
+  	
+  	<association associationDefinition="One" id="a1" sourceRef="compensateBookHotelEvet" targetRef="undoHotelBook"/>
+  	<serviceTask id="undoHotelBook" isForCompensation="true" flowable:class="..."/>
+  </process>
+  
+</definitions>
+
+<!-- Note: the compensation boundary event is not supported on embedded sub-processes. -->

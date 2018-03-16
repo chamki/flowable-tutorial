@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+  <process id="myProcess">
+  	<boundaryEvent id="boundary" attachedToRef="task" cancelActivity="true">
+  		<signalEventDefinition signalRef="alertSignal"/>
+  	</boundaryEvent>
+  </process>
+  
+</definitions>
+
+<!-- Note: contrary to other events, such as the boundary error event, a boundary signal event doesn’t only catch signal events thrown from the scope to which it is attached. On the contrary, a signal event has global scope (broadcast semantics), meaning that the signal can be thrown from any place, even from a different process instance.
+
+Note: contrary to other events, such as the error event, a signal is not consumed if it is caught. If you have two active signal boundary events catching the same signal event, both boundary events are triggered, even if they are part of different process instances -->

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<boundaryEvent id="escalationTimer" cancelActivity="true" attachedToRef="firstLineSupport">
+	<timerEventDefinition>
+		<timeDuration>PT4H</timeDuration>
+	</timerEventDefinition>
+</boundaryEvent>
+
+<!-- Note: boundary timer events are only fired when the async executor is enabled (asyncExecutorActivate needs to be set to true in the flowable.cfg.xml, 
+	since the async executor is disabled by default) -->

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- Note: a sub-process always has a none start event. -->
+<!-- none start Event -->
+<startEvent id="start" name="my start event"/>
+
+<!-- formKey  -->
+<startEvent id="request" flowable:formKey="request"/>

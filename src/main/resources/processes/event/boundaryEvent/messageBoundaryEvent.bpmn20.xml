@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+  <process id="myProcess">
+  	<boundaryEvent id="boundary" attachedToRef="task" cancelActivity="true">
+  		<messageEventDefinition messageRef="newCustomerMessage"/>
+  	</boundaryEvent>
+  </process>
+  
+</definitions>
+
+
+<!-- Note that boundary message event can be both interrupting (right-hand side) and non-interrupting (left-hand side). -->

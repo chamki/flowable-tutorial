@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:flowable="http://flowable.org/bpmn"
+	targetNamespace="Examples" xmlns:tns="Examples">
+
+	<error id="myError" errorCode="123" />
+
+	<process id="myProcess">
+		<boundaryEvent id="catchError" attachedToRef="mySubprocess">
+			<errorEventDefinition errorRef="myError" />
+		</boundaryEvent>
+	</process>
+</definitions>
+
+<!-- The errorCode is used to match the errors that are caught:
+
+If errorRef is omitted, the boundary error event will catch any error event, regardless of the errorCode of the error.
+
+If an errorRef is provided and it references an existing error, the boundary event will only catch errors with the same error code.
+
+If an errorRef is provided, but no error is defined in the BPMN 2.0 file, then the errorRef is used as errorCode (similar for with error end events). -->

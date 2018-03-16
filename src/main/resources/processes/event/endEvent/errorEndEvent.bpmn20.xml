@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+	<error id="myError" errorCode="error123"/>
+	
+	<process id="myProcess">
+		<endEvent id="myErrorEndEvent">
+			<endEventDefinition errorRef="myError"/>
+			<!-- is equals to -->
+			<!-- <endEventDefinition errorRef="error123"/> -->
+		</endEvent>
+	</process>
+
+</definitions>
+
+<!-- Note that the errorRef must comply with the BPMN 2.0 schema, and must be a valid QName. -->

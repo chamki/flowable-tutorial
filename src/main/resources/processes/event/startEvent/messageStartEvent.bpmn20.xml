@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+  <message id="newInvoice" name="newInvoiceMessage"/>
+  
+  <process id="invoiceProcess">
+  	<startEvent id="messageStart">
+  		<messageEventDefinition messageRef="tns:newInvoice"/>
+  	</startEvent>
+  </process>
+</definitions>
+
+<!-- When deploying a process definition with one or more message start events, the following considerations apply:
+
+	The name of the message start event must be unique across a given process definition. A process definition must not have multiple message start events with the same name. Flowable throws an exception upon deployment of a process definition containing two or more message start events referencing the same message, or if two or more message start events reference messages with the same message name.
+
+	The name of the message start event must be unique across all deployed process definitions. Flowable throws an exception upon deployment of a process definition containing one or more message start events referencing a message with the same name as a message start event already deployed by a different process definition.
+
+	Process versioning: Upon deployment of a new version of a process definition, the start message subscriptions of the previous version are removed. -->
+	
+	<!-- The following considerations apply when starting a process instance:
+
+		Message start events are only supported on top-level processes. Message start events are not supported on embedded sub processes.
+
+		If a process definition has multiple message start events, runtimeService.startProcessInstanceByMessage(…​) allows to select the appropriate start event.
+
+		If a process definition has multiple message start events and a single none start event, runtimeService.startProcessInstanceByKey(…​) and runtimeService.startProcessInstanceById(…​) starts a process instance using the none start event.
+
+		If a process definition has multiple message start events and no none start event, runtimeService.startProcessInstanceByKey(…​) and runtimeService.startProcessInstanceById(…​) throw an exception.
+
+		If a process definition has a single message start event, runtimeService.startProcessInstanceByKey(…​) and runtimeService.startProcessInstanceById(…​) start a new process instance using the message start event.
+
+		If a process is started from a call activity, message start event(s) are only supported if
+
+		in addition to the message start event(s), the process has a single none start event
+
+		the process has a single message start event and no other start events. -->

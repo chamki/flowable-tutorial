@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<timerEventDefinition flowable:businessCalanderName="custom">
+	
+</timerEventDefinition>
+
+<timerEventDefinition>
+	<timeDate>2018-03-15T10:12:30</timeDate>
+</timerEventDefinition>
+
+<!-- interval lasting 10 days -->
+<timerEventDefinition>
+	<timeDuration>P10D</timeDuration>
+</timerEventDefinition>
+
+
+<!-- Currently, only the BoundaryTimerEvents and CatchTimerEvent support EndDate functionality. -->
+<timerEventDefinition>
+	<timeCycle flowable:endDate="2018-03-21T15:06:20+00:00">R3/PT10H</timeCycle>
+</timerEventDefinition>
+
+<timerEventDefinition>
+	<timeCycle>R3/PT10H${EndDate}</timeCycle>
+</timerEventDefinition>
+
+<boundaryEvent id="escalationTimer" cancleActivity="true" attachedToRef="firstLineSupport">
+	<timerEventDefinition>
+		<timeDuration>${duration}</timeDuration>
+	</timerEventDefinition>
+</boundaryEvent>
+
+<!-- Note: timers are only fired when the async executor is enabled (asyncExecutorActivate must be set to true in the flowable.cfg.xml, 
+because the async executor is disabled by default) -->

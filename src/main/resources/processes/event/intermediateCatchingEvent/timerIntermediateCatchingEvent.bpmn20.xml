@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+  <process id="myProcess">
+  	<intermediateCatchEvent id="timer">
+  		<timerEventDefinition>
+  			<timeDuration>PT5M</timeDuration>
+  		</timerEventDefinition>
+  	</intermediateCatchEvent>
+  </process>
+</definitions>

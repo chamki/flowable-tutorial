@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:flowable="http://flowable.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+  
+  <message id="newInvoice" name="newInvoiceMessage"/>
+  <message id="payment" name="paymentMessage"/>
+  
+  <process id="invoiceProcess">
+  	<startEvent id="messageStart">
+  		<messageEventDefiniton messageRef="newInvoice"/>
+  	</startEvent>
+  	
+  	<intermediateCatchEvent id="paymentEvt">
+  		<messageEventDefinition messageRef="payment"/>
+  	</intermediateCatchEvent>
+  </process>
+</definitions>
