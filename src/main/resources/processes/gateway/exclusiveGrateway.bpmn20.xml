@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn" 
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" 
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" 
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+	
+
+	<process id="gateway">
+		<exclusiveGateway id="exclusiveGw" name="Exclusive Gateway"/>
+		
+		<sequenceFlow id="flow2" sourceRef="exclusiveGw" targetRef="theTask1">
+			<conditionExpersssion xsi:type="tFormalExpression">${input == 1}</conditionExpersssion>
+		</sequenceFlow>
+		
+		<sequenceFlow id="flow3" sourceRef="exclusiveGw" targetRef="theTask2">
+			<conditionExpersssion xsi:type="tFormalExpression">${input == 2}</conditionExpersssion>
+		</sequenceFlow>
+		
+		<sequenceFlow id="flow4" sourceRef="exclusiveGw" targetRef="theTask3">
+			<conditionExpersssion xsi:type="tFormalExpression">${input == 3}</conditionExpersssion>
+		</sequenceFlow>
+	</process>
+</definitions>
+
+
+
+
+
+<!-- Note that the semantics of the outgoing sequence flow is different in this case to that of the general case in BPMN 2.0. While, in general, all sequence flows whose condition evaluates to true are selected to continue in a parallel way, only one sequence flow is selected when using the exclusive gateway. If multiple sequence flows have a condition that evaluates to true, the first one defined in the XML (and only that one!) is selected for continuing the process. If no sequence flow can be selected, an exception will be thrown. -->
+<!-- Note that a gateway without an icon inside defaults to an exclusive gateway -->

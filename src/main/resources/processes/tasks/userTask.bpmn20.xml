@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn" 
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" 
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" 
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+	
+	<process id="task">
+		<userTask id="theTask" name="Schedule meeting">
+			<documentation>
+				Schedule an engineering meeting for next week with new hire.
+			</documentation>
+		</userTask>
+		
+		<!-- due date -->
+		<userTask id="theTask1" name="important task" flowable:dueDate="${dateVariable}"/>
+		
+		<!-- User assignment -->
+		<userTask id="theTask2" name="Important task">
+			<humanPerformer>
+				<resourceAssignmentExpression>
+					<formalExpression>kermit</formalExpression>
+				</resourceAssignmentExpression>
+			</humanPerformer>
+		</userTask>
+		
+		<!--  candidate task list of people -->
+		<userTask id="theTask3" name="important task">
+			<potentialOwner>
+				<resourceAssignmentExpression>
+					<formalExpression>user(kermit), group(management)</formalExpression>
+				</resourceAssignmentExpression>
+			</potentialOwner>
+		</userTask>
+		
+		<!-- Flowable extensions for task assignment -->
+		<!-- assignee attribute: this custom extension allows direct assignment of a given user to a task. -->
+		<userTask id="theTask4" name="my task 4" flowable:assignee="kermit"/>
+		
+		<!-- candidateUsers attribute: this custom extension makes a given user a candidate for a task -->
+		<userTask id="theTask5" name="my task 5" flowable:candidateUsers="kermit, gonzo"/>
+		
+		<!-- candidateGroups attribute: this custom extension makes a given group a candidate for a task -->
+		<userTask id="theTask6" name="my task 6" flowable:candidateGroups="management, accountancy"/>
+		
+		<!-- Custom identity link types -->
+		
+		<userTask id="theTask7">
+			<extensionElements>
+				<flowable:customResource flowable:name="businessAdministrator">
+					<resourceAssignementExpression>
+						<formalExpression>user(kermit), group(management)</formalExpression>
+					</resourceAssignementExpression>
+				</flowable:customResource>
+			</extensionElements>
+		</userTask>
+		
+		<userTask id="task8">
+			<extensionElements>
+				<flowable:taskListener event="create" class="com.soarswing.flow.listener.MyAssignmentHandler"/>
+			</extensionElements>
+		</userTask>
+		
+		<userTask id="task9" name="My task" flowable:assignee="${ldapService.findManagerForEmployee(emp)}"/>
+		
+		<userTask id="task10" name="My Task9" flowable:candidateUsers="${ldapService.findAllSales()}"/>
+		<!-- Note that this will only work if the return type of the invoked method is String or Collection<String> (for candidate users and groups) -->
+	</process>
+</definitions>
+
+<!-- The description text can be retrieved from the task in the standard Java way:
+	task.getDescription() -->
+	
+<!-- Tasks directly assigned to users can be retrieved through the TaskService as follows:
+List<Task> tasks = taskService.createTaskQuery().taskAssignee("kermit").list();
+	 -->
+	
+<!-- Tasks defined with the potential owner construct can be retrieved as follows (or a similar TaskQuery usage as for the tasks with an assignee):
+ List<Task> tasks = taskService.createTaskQuery().taskCandidateUser("kermit");
+ -->
+ 
+ <!-- Note: Although Flowable provides an identity management component, which is exposed through the IdentityService, no check is made whether a provided user is known by the identity component. This is to allow Flowable to integrate with existing identity management solutions when it is embedded in an application -->

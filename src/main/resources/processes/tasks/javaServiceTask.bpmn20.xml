@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn" 
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" 
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" 
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+             
+             
+    <process id="javaServiceTask">
+    	<serviceTask id="javaService" name="My Java Service Task" flowable:class="org.flowable.MyJavaDelegate"/>
+    	
+    	<serviceTask id="serviceTask" flowable:delegateExpression="${delegateExpressionBean}"/>
+    	
+    	<serviceTask id="javaService2" name="My Java Service Task 2" flowable:expression="${printer.printMessage()}"/>
+    	
+    	<serviceTask id="javaService3" name="My Java Service Task 3" flowable:expression="${printer.printMessage(execution, myVar)}"/>
+    	
+    	<serviceTask id="javaService4" name="My Java Service Task 4" flowable:expression="${split.ready}"/>
+    	
+    	<serviceTask id="javaService5" name="Java Service Invocation" flowable:class="com.soarswing.flow.delegate.ToUpperCaseFieldInjected">
+    		<extensionElements>
+    			<flowable:field name="text" stringValue="Hello World"/>
+    		</extensionElements>
+    	</serviceTask>
+    	
+    	<serviceTask id="javaService6" name="Java service invocation2" flowable:class="com.soarswing.flow.delegate.ToUpperCaseFieldInjected">
+    		<extensionElements>
+    			<flowable:field name="text">
+    				<flowable:string>
+    					This is a long string with a lot of words and potentially way longer even!
+    				</flowable:string>
+    			</flowable:field>
+    		</extensionElements>
+    	</serviceTask>
+    	
+    	<serviceTask id="javaService7" name="Java service invocation3" flowable:class="com.soarswing.flow.delegate.ReverseStringFieldInjected">
+    		<extensionElements>
+    			<flowable:field name="text1">
+    				<flowable:expression>${genderBean.getGenderString(gender)}</flowable:expression>
+    			</flowable:field>
+    			<flowable:field name="text2">
+    				<flowable:expression>Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}</flowable:expression>
+    			</flowable:field>
+    		</extensionElements>
+    	</serviceTask>
+    	
+    	<seviceTask id="aMethodExpressionServiceTask" flowable:expression="#{myService.doSomething()}" flowable:resultVariable="myVar"/>
+    </process>
+</definitions>

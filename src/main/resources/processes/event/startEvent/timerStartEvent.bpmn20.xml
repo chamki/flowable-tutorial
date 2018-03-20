@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn" 
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" 
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             typeLanguage="http://www.w3.org/2001/XMLSchema" 
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.flowable.org/processdef">
+             
 <!-- Timer Start Event -->
 <!-- Note: a sub-process cannot have a timer start event. -->
 <!-- Note: a start timer event is scheduled as soon as process is deployed. -->
@@ -18,3 +27,4 @@
 		<timeDate>2011-03-11T12:13:14</timeDate>
 	</timerEventDefintion>
 </startEvent>
+</definitions>

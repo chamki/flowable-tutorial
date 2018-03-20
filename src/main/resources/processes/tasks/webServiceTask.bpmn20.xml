@@ -7,12 +7,15 @@
              typeLanguage="http://www.w3.org/2001/XMLSchema" 
              expressionLanguage="http://www.w3.org/1999/XPath"
              targetNamespace="http://www.flowable.org/processdef">
-
-<!-- Note: a sub-process always has a none start event. -->
-<!-- none start Event -->
-<startEvent id="start" name="my start event"/>
-
-<!-- formKey  -->
-<startEvent id="request" flowable:formKey="request"/>
-
+             
+             
+   <import importType="http://schemas.xmlsoap.org/wsdl/"
+	location="http://localhost:63081/counter?wsdl"
+	namespace="http://webservice.flowable.org/" />
+   
+   <message id="prettyPrintCountRequestMessage" itemRef="tns:prettyPrintCountRequestItem"/> 
+   <message id="prettyPrintCountResponseMessage" itemRef="tns:prettyPrintCountResponseItem"/>
+   
+   <itemDefinition id="prettyPrintCountRequestItem" structureRef="counter:prettyPrintCount"/>
+   <itemDefinition id="prettyPrintCountResponseItem" structureRef="counter:prettyPrintCountResponse"/>
 </definitions>
